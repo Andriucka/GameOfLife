@@ -24,6 +24,7 @@ public:
     int checkBoundaries(int iterationNum, int coord);
     bool checkRuleTwo(uint8_t neighCount, int x, int y);
     bool checkRuleFour(uint8_t neighCount, int x, int y);
+    void drawRandom();
 
 private:
     Matrix<Cell,HEIGHT,LENGTH> theCells;

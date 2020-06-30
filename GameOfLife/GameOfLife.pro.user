@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.12.3, 2020-06-29T15:57:28. -->
+<!-- Written by QtCreator 4.12.3, 2020-06-30T17:01:00. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -582,7 +582,7 @@
     <value type="bool" key="RunConfiguration.UseMultiProcess">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory">C:/Users/andrius.zaleckis/Desktop/qt5 projects/GameOfLife_rep/GameOfLife</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/andrius.zaleckis/Desktop/qt5 projects/GameOfLife_rep/MainCode_build</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>

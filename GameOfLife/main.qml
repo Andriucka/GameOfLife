@@ -54,6 +54,11 @@ ApplicationWindow {
         RowLayout {
             anchors.centerIn: parent
             Button {
+                text: qsTr("Randomise")
+                onClicked: gameOfLife.drawRandom()
+            }
+
+            Button {
                 text: qsTr("Draw Glider")
                 onClicked: gameOfLife.drawGlider()
             }

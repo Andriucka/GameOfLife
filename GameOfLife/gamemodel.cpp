@@ -68,3 +68,9 @@ void GameModel::drawGlider()
     model.drawGlider(HEIGHT/2, LENGTH/2);
     emit dataChanged(index(0, 0), index(HEIGHT - 1, LENGTH - 1), {CellRole});
 }
+
+void GameModel::drawRandom()
+{
+    model.drawRandom();
+    emit dataChanged(index(0, 0), index(HEIGHT - 1, LENGTH - 1), {CellRole});
+}

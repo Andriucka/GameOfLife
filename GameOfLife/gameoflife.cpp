@@ -3,13 +3,13 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <omp.h>
-//#include <ctime>
+#include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 
 uint8_t GameOfLife::neighCount(int x, int y)
 {
-
     uint8_t count = 0;
 #pragma omp parallel for
     for (int i = -1; i <= 1; i++)
@@ -59,25 +59,27 @@ int GameOfLife::checkBoundaries(int iterationNum, int coord)
 
 bool GameOfLife::checkRuleTwo(uint8_t neighCount, int x, int y)
 {
-    if ((neighCount == 2 || neighCount == 3) && (theCells[x][y].getState() == true))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return ((neighCount == 2 || neighCount == 3) && (theCells[x][y].getState() == true)) ? true : false;
 }
 
 bool GameOfLife::checkRuleFour(uint8_t neighCount, int x, int y)
 {
-    if ((neighCount == 3) && (theCells[x][y].getState() == false))
+    return ((neighCount == 3) && (theCells[x][y].getState() == false)) ? true : false;
+}
+
+void GameOfLife::drawRandom()
+{
+    srand (time(NULL));
+#pragma omp parallel for
+    for(int i = 0; i< HEIGHT; i++)
     {
-        return true;
-    }
-    else
-    {
-        return false;
+        for (int j = 0; j < LENGTH; j++)
+        {
+            if(rand() % 2 != 0)
+                theCells[i][j].setAlive();
+            else
+                theCells[i][j].setDead();
+        }
     }
 }
 

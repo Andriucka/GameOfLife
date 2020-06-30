@@ -17,6 +17,7 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
     Q_INVOKABLE void iterate();
     Q_INVOKABLE void drawGlider();
+    Q_INVOKABLE void drawRandom();
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     bool setData(const QModelIndex &index, const QVariant &value,int role = Qt::EditRole) override;
 
