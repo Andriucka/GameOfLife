@@ -18,6 +18,7 @@ LIBS += -fopenmp
 LIBS += -lgomp
 
 SOURCES += \
+        cell.cpp \
         gamemodel.cpp \
         gameoflife.cpp \
         main.cpp

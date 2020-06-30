@@ -1,11 +1,17 @@
 #include "gamemodel.h"
 
-
 GameModel::GameModel(QObject *parent) : QAbstractTableModel(parent)
 {
 
 }
 
+QHash<int, QByteArray> GameModel::roleNames() const
+{
+    return
+    {
+        { CellRole, "value" }
+    };
+}
 
 int GameModel::rowCount(const QModelIndex &parent) const
 {
@@ -28,18 +34,26 @@ QVariant GameModel::data(const QModelIndex &index, int role) const
     if (!index.isValid() || role != CellRole)
         return QVariant();
 
-    return QVariant(model.theCells[index.column()][index.row()].alive);
+    return QVariant(model.getState(index.row(), index.column()));
 }
 
 bool GameModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (data(index, role) == value)
-            return false;
+        return false;
 
-        model.theCells[index.column()][index.row()].alive = value.toBool();
-        emit dataChanged(index, index, {role});
+    if(value.toBool())
+    {
+        model.setAlive(index.row(), index.column());
+    }
+    else
+    {
+        model.setDead(index.row(), index.column());
+    }
 
-        return true;
+    emit dataChanged(index, index, {role});
+
+    return true;
 }
 
 

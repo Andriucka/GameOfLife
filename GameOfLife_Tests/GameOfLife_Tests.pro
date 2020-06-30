@@ -15,4 +15,5 @@ SOURCES += \
         main.cpp
 
 INCLUDEPATH += \
-    ../GameOfLife
+    ../GameOfLife \
+    C:\Qt\Tools\mingw810_64\lib\gcc\x86_64-w64-mingw32\8.1.0\include

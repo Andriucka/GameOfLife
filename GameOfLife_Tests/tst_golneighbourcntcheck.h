@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 #include <gmock/gmock-matchers.h>
-#include "gameoflife.cpp"
+#include "gameoflife.h"
 #include "cell.h"
 
 using namespace testing;
@@ -48,7 +48,11 @@ TEST(GameOfLifeTest, IterationTest) {
     TestNeighbours2.drawGlider(1, 1);
     for (int i = 0; i < HEIGHT; i++)
         for (int j = 0; j < LENGTH; j++)
+        {
+
+
             EXPECT_EQ(TestNeighbours2.theCells[i][j].alive, TestNeighbours1.theCells[i][j].alive);
+        }
 }
 
 #endif // TST_GOLNEIGHBOURCNTCHECK_H

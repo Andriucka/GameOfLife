@@ -8,24 +8,22 @@
 template <class T, size_t ROW, size_t COL >
 using Matrix = std::array<std::array<T, COL>, ROW>;
 
-constexpr auto HEIGHT = 100;
-constexpr auto LENGTH = 100;
+const auto HEIGHT = 100;
+const auto LENGTH = 100;
 
 class GameOfLife
 {
 public:
-
-
     GameOfLife() = default;
-    Matrix<Cell,HEIGHT,LENGTH> theCells;
-
     void nextStep();
     void drawGlider(int startX, int startY);
-    uint8_t neighbour_cnt(int x, int y);
-
+    uint8_t neighCnt(int x, int y);
+    bool getState(int x, int y) const;
+    void setAlive(int x, int y);
+    void setDead(int x, int y);
 
 private:
-
+    Matrix<Cell,HEIGHT,LENGTH> theCells;
     Matrix<Cell, HEIGHT, LENGTH> nextCells;
 };
 

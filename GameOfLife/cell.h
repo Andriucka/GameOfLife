@@ -1,12 +1,16 @@
 #ifndef CELL_H
 #define CELL_H
 
-#pragma once
-
 class Cell
 {
 public:
-    Cell() : alive(false) {}
+
+    Cell();
+    bool getState() const;
+    void setDead();
+    void setAlive();
+
+private:
     bool alive;
 };
 
