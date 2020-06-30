@@ -4,7 +4,6 @@
 class Cell
 {
 public:
-
     Cell();
     bool getState() const;
     void setDead();

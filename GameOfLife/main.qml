@@ -53,6 +53,10 @@ ApplicationWindow {
 
         RowLayout {
             anchors.centerIn: parent
+            Button {
+                text: qsTr("Draw Glider")
+                onClicked: gameOfLife.drawGlider()
+            }
 
             Button {
                 text: qsTr("Next")

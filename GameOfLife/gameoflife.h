@@ -3,7 +3,7 @@
 
 #include <cstdint>
 #include <array>
-#include "cell.h"
+#include <cell.h>
 
 template <class T, size_t ROW, size_t COL >
 using Matrix = std::array<std::array<T, COL>, ROW>;
@@ -17,10 +17,13 @@ public:
     GameOfLife() = default;
     void nextStep();
     void drawGlider(int startX, int startY);
-    uint8_t neighCnt(int x, int y);
+    uint8_t neighCount(int x, int y);
     bool getState(int x, int y) const;
     void setAlive(int x, int y);
     void setDead(int x, int y);
+    int checkBoundaries(int iterationNum, int coord);
+    bool checkRuleTwo(uint8_t neighCount, int x, int y);
+    bool checkRuleFour(uint8_t neighCount, int x, int y);
 
 private:
     Matrix<Cell,HEIGHT,LENGTH> theCells;

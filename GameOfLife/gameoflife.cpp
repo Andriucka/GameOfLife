@@ -1,4 +1,4 @@
-#include "gameoflife.h"
+#include <gameoflife.h>
 #include <iostream>
 #include <stdbool.h>
 #include <stdio.h>
@@ -7,7 +7,7 @@
 
 using namespace std;
 
-uint8_t GameOfLife::neighCnt(int x, int y)
+uint8_t GameOfLife::neighCount(int x, int y)
 {
 
     uint8_t count = 0;
@@ -16,31 +16,19 @@ uint8_t GameOfLife::neighCnt(int x, int y)
     {
         for (int j = -1; j <= 1; j++)
         {
-            int tempX;
-            int tempY;
-            if (((x + i) < 0))
-                tempX = LENGTH - 1;
-            else if ((x + i) >= LENGTH)
-                tempX = 0;
-            else
-                tempX = x + i;
+            int tempX = checkBoundaries(i, x);
+            int tempY = checkBoundaries(j, y);
 
-            if (((y + j) < 0))
-                tempY = HEIGHT - 1;
-            else if ((y + j) >= HEIGHT)
-                tempY = 0;
-            else
-                tempY = y + j;
-
-            if (tempX < 0 || tempY < 0 || (tempX == x && tempY == y))
+            if (tempX == x && tempY == y)
+            {
                 continue;
-            else{
-                if (theCells[tempX][tempY].getState())
-                    count++;
+            }
+            else if (theCells[tempX][tempY].getState())
+            {
+                count++;
             }
         }
     }
-
     return count;
 }
 
@@ -59,6 +47,40 @@ void GameOfLife::setDead(int x, int y)
     theCells[x][y].setDead();
 }
 
+int GameOfLife::checkBoundaries(int iterationNum, int coord)
+{
+    if (((coord + iterationNum) < 0))
+        return LENGTH - 1;
+    else if ((coord + iterationNum) >= LENGTH)
+        return 0;
+    else
+        return coord + iterationNum;
+}
+
+bool GameOfLife::checkRuleTwo(uint8_t neighCount, int x, int y)
+{
+    if ((neighCount == 2 || neighCount == 3) && (theCells[x][y].getState() == true))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool GameOfLife::checkRuleFour(uint8_t neighCount, int x, int y)
+{
+    if ((neighCount == 3) && (theCells[x][y].getState() == false))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 void GameOfLife::nextStep()
 {
 #pragma omp parallel for
@@ -66,10 +88,11 @@ void GameOfLife::nextStep()
     {
         for (int j = 0; j < LENGTH; j++)
         {
-            int temp = neighCnt(i, j);
-            if ((temp == 2 || temp == 3) && (theCells[i][j].getState() == true))
+            int temp = neighCount(i, j);
+            /*We only need to check two rules to determine whether the cell has to survive or not */
+            if (checkRuleTwo(temp, i, j))
                 nextCells[i][j].setAlive();
-            else if ((temp == 3) && (theCells[i][j].getState() == false))
+            else if (checkRuleFour(temp, i, j))
                 nextCells[i][j].setAlive();
             else
                 nextCells[i][j].setDead();

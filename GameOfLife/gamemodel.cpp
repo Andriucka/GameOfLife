@@ -1,4 +1,4 @@
-#include "gamemodel.h"
+#include <gamemodel.h>
 
 GameModel::GameModel(QObject *parent) : QAbstractTableModel(parent)
 {
@@ -60,5 +60,11 @@ bool GameModel::setData(const QModelIndex &index, const QVariant &value, int rol
 void GameModel::iterate()
 {
     model.nextStep();
+    emit dataChanged(index(0, 0), index(HEIGHT - 1, LENGTH - 1), {CellRole});
+}
+
+void GameModel::drawGlider()
+{
+    model.drawGlider(HEIGHT/2, LENGTH/2);
     emit dataChanged(index(0, 0), index(HEIGHT - 1, LENGTH - 1), {CellRole});
 }
